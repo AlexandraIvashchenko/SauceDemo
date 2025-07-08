@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import {STANDARD_USER} from "./globals";
 
 /**
  * Read environment variables from file.
@@ -47,7 +48,7 @@ export default defineConfig({
       testDir: './src/tests',
       testMatch: /.*\.test\.ts/,
       use: { ...devices['Desktop chrome'],
-        storageState: 'src/globalSetup/.auth/authStandardUser.json',},
+        storageState: STANDARD_USER},
       // Use prepared auth state.
       dependencies: ['setup'],
     },

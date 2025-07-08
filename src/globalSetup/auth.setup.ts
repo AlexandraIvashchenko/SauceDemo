@@ -1,8 +1,10 @@
 import { test as setup, expect } from '@playwright/test';
 import {PageObjectManagerPo} from "../page-object/PageObjectManager.po";
+import {STANDARD_USER} from "../../globals";
+import {LOCKED_USER} from "../../globals";
 
-const authStandardUserFile = '.auth/authStandardUser.json';
-const authLockedUserFile = '.auth/authLockedUser.json';
+// const authStandardUserFile = STANDARD_USER;
+// const authLockedUserFile = LOCKED_USER;
 
 setup('authenticate with standard user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
@@ -14,7 +16,7 @@ setup('authenticate with standard user', async ({ page }) => {
     await expect(pm.login.getLoginButton()).toBeVisible();
     await pm.login.getLoginButton().click();
     expect(pm.login.getCurrentUrl()).toContain('/inventory.html');
-    await page.context().storageState({ path: authStandardUserFile });
+    await page.context().storageState({ path: STANDARD_USER });
 });
 
 setup('authenticate with locked out user', async ({ page }) => {
@@ -28,5 +30,5 @@ setup('authenticate with locked out user', async ({ page }) => {
     await pm.login.getLoginButton().click();
     expect(pm.login.getCurrentUrl()).toContain('https://www.saucedemo.com/');
     await expect(pm.login.getErrorMessage()).toBeVisible();
-    await page.context().storageState({ path: authLockedUserFile });
+    await page.context().storageState({ path: LOCKED_USER });
 });
