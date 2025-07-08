@@ -1,30 +1,32 @@
 import { test as setup, expect } from '@playwright/test';
-import path from 'path';
+import {PageObjectManagerPo} from "../page-object/PageObjectManager.po";
 
-const authStandardUserFile = path.join(__dirname, '.auth/authStandardUser.json');
-const authLockedUserFile = path.join(__dirname, '.auth/authLockedUser.json');
+const authStandardUserFile = '.auth/authStandardUser.json';
+const authLockedUserFile = '.auth/authLockedUser.json';
 
 setup('authenticate with standard user', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com');
-    await expect(page.locator('[name="user-name"]')).toBeVisible();
-    await page.fill('[name="user-name"]', 'standard_user');
-    await expect(page.locator('[name="password"]')).toBeVisible();
-    await page.fill('[name="password"]', 'secret_sauce');
-    await expect(page.locator('[name="login-button"]')).toBeVisible();
-    await page.click('[name="login-button"]');
-    await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
+    const pm = new PageObjectManagerPo(page);
+    await pm.login.goto();
+    await expect(pm.login.getUsernameField()).toBeVisible();
+    await pm.login.getUsernameField().fill('standard_user');
+    await expect(pm.login.getPasswordField()).toBeVisible();
+    await pm.login.getPasswordField().fill( 'secret_sauce');
+    await expect(pm.login.getLoginButton()).toBeVisible();
+    await pm.login.getLoginButton().click();
+    expect(pm.login.getCurrentUrl()).toContain('/inventory.html');
     await page.context().storageState({ path: authStandardUserFile });
 });
 
 setup('authenticate with locked out user', async ({ page }) => {
-    await page.goto('https://www.saucedemo.com');
-    await expect(page.locator('[name="user-name"]')).toBeVisible();
-    await page.fill('[name="user-name"]', 'locked_out_user');
-    await expect(page.locator('[name="password"]')).toBeVisible();
-    await page.fill('[name="password"]', 'secret_sauce');
-    await expect(page.locator('[name="login-button"]')).toBeVisible();
-    await page.click('[name="login-button"]');
-    await expect(page).toHaveURL('https://www.saucedemo.com/');
-    await expect(page.locator('[data-test="error"]')).toBeVisible();
+    const pm = new PageObjectManagerPo(page);
+    await pm.login.goto();
+    await expect(pm.login.getUsernameField()).toBeVisible();
+    await pm.login.getUsernameField().fill( 'locked_out_user');
+    await expect(pm.login.getPasswordField()).toBeVisible();
+    await pm.login.getPasswordField().fill('secret_sauce');
+    await expect(pm.login.getLoginButton()).toBeVisible();
+    await pm.login.getLoginButton().click();
+    expect(pm.login.getCurrentUrl()).toContain('https://www.saucedemo.com/');
+    await expect(pm.login.getErrorMessage()).toBeVisible();
     await page.context().storageState({ path: authLockedUserFile });
 });

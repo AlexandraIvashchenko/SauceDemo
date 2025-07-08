@@ -11,27 +11,32 @@ type UserFixtures = {
 let globalPage: Page;
 
 export const test = base.extend<UserFixtures>({
-    loginAs: async ({ browser }, use) => {
-        const loginAs = async (type: UserType): Promise<{ page: Page }> => {
-            const states = {
-                standard: '.auth/authStandardUser.json',
-                locked_out: '.auth/authLockedUser.json',
-            };
+    // loginAs: async ({ browser }, use) => {
+    //     const loginAs = async (type: UserType): Promise<{ page: Page }> => {
+    //         const states = {
+    //             standard: '.auth/authStandardUser.json',
+    //             locked_out: '.auth/authLockedUser.json',
+    //         };
+    //
+    //         const context = await browser.newContext({
+    //             storageState: states[type],
+    //         });
+    //
+    //         const page = await context.newPage();
+    //         globalPage = page;
+    //         return { page };
+    //     };
+    //
+    //     await use(loginAs);
+    // },
 
-            const context = await browser.newContext({
-                storageState: states[type],
-            });
-
-            const page = await context.newPage();
-            globalPage = page;
-            return { page };
-        };
-
-        await use(loginAs);
-    },
-
-    pm: async ({}, use) => {
-        const pom = new PageObjectManagerPo(globalPage);
+    pm: async ({browser}, use) => {
+        const context = await browser.newContext({
+            storageState: '.auth/authStandardUser.json'
+        });
+        const page = await context.newPage();
+        const pom = new PageObjectManagerPo(page);
         await use(pom);
     },
+
 });

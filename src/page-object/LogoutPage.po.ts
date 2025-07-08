@@ -8,7 +8,7 @@ export class LogoutPagePo extends BasePagePo{
     }
 
     getMenuToGetLogoutButton(): Locator{
-        return this.page.locator('[data-test="open-menu"]')
+        return this.page.locator('[id="react-burger-menu-btn"]')
     }
 
     getLogoutButton(): Locator{

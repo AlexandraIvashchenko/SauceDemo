@@ -4,7 +4,7 @@ export abstract class BasePagePo{
     protected constructor(protected page: Page, protected uri: string) {
     }
 
-    async goto(uri:string){
+    async goto(){
          await this.page.goto(this.uri);
     }
 

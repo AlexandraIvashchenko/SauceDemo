@@ -2,10 +2,11 @@ import {Page} from "@playwright/test";
 import {Locator} from "@playwright/test";
 import {BasePagePo} from "./BasePage.po";
 
+
 export class LoginPagePo extends BasePagePo{
 
     constructor( page: Page) {
-        super(page, '/')
+        super(page, '/inventory.html')
     }
 
     getUsernameField(): Locator {
@@ -27,4 +28,5 @@ export class LoginPagePo extends BasePagePo{
     getErrorMessage(): Locator{
         return  this.page.locator('[data-test="error"]')
     }
+
 }

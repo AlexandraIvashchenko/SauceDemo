@@ -4,18 +4,19 @@ import {LogoutPagePo} from "./LogoutPage.po";
 import {LoginPagePo} from "./LoginPage.po";
 
 export class PageObjectManagerPo{
+
     constructor(private page: Page) {
     }
 
-    get Login(): LoginPagePo{
+    get login(): LoginPagePo{
         return new LoginPagePo(this.page);
     }
 
-    get Product(): ProductPagePo{
+    get product(): ProductPagePo{
         return new ProductPagePo(this.page);
     }
 
-    get Logout(): LogoutPagePo{
+    get logout(): LogoutPagePo{
         return new LogoutPagePo(this.page)
     }
 }
