@@ -4,11 +4,11 @@ import {BasePagePo} from "./BasePage.po";
 
 export class LogoutPagePo extends BasePagePo{
     constructor(page: Page) {
-        super(page, '/')
+        super(page, '/inventory.html');
     }
 
     getMenuToGetLogoutButton(): Locator{
-        return this.page.locator('[id="react-burger-menu-btn"]')
+        return this.page.locator('[data-test="open-menu"]')
     }
 
     getLogoutButton(): Locator{

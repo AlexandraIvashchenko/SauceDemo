@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from '../fixtures/BaseFile';
 
-test('item can be added to the cart', async ({pm}) => {
-    await pm.Product.goto();
+test('item can be added to the cart', async ({loginAs, pm}) => {
+    await pm.Product.goto('/inventory.html');
     await expect(pm.Product.getAddToCartButton('sauce-labs-backpack')).toBeVisible({timeout: 2000});
     await pm.Product.addToCart('sauce-labs-backpack');
     await expect(pm.Product.getCartButton()).toBeVisible();

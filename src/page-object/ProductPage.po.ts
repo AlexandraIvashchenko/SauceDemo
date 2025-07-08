@@ -4,7 +4,7 @@ import {BasePagePo} from "./BasePage.po";
 export class ProductPagePo extends BasePagePo{
 
     constructor(page: Page) {
-        super(page, '/')
+        super(page, '/inventory.html')
     }
 
     getAddToCartButton(itemName: string): Locator {
