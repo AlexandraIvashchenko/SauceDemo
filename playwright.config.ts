@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import {STANDARD_USER} from "./globals";
+import {LOCKED_USER, STANDARD_USER} from "./globals";
 
 /**
  * Read environment variables from file.
@@ -37,20 +37,23 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     { name: 'setup', testDir: './src/globalSetup/', testMatch: 'auth.setup.ts' },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
     {
-      name: 'Google_Chrome',
-      testDir: './src/tests',
+      name: 'Google_Chrome_Standard_User',
+      testDir: './src/tests/standardUser/',
       testMatch: /.*\.test\.ts/,
       use: { ...devices['Desktop chrome'],
         storageState: STANDARD_USER},
       // Use prepared auth state.
       dependencies: ['setup'],
     },
+    {
+      name: 'Google_Chrome_Locked_User',
+      testDir: './src/tests/lockedUser/',
+      testMatch: /.*\.test\.ts/,
+      use: { ...devices['Desktop chrome'],
+        storageState: LOCKED_USER},
+      // Use prepared auth state.
+      dependencies: ['setup'],
+    }
   ],
 });

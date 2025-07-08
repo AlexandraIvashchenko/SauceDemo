@@ -1,4 +1,4 @@
-import { test } from "../fixtures/BaseFile";
+import { test } from "../../fixtures/BaseFile";
 import { expect } from "@playwright/test";
 
 test('user logout from the website', async ({ pm }) => {

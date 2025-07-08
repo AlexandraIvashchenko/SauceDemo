@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../fixtures/BaseFile';
+import { test } from '../../fixtures/BaseFile';
 
 test('item can be added to the cart', async ({pm}) => {
     await pm.product.goto();

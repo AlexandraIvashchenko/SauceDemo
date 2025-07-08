@@ -3,9 +3,6 @@ import {PageObjectManagerPo} from "../page-object/PageObjectManager.po";
 import {STANDARD_USER} from "../../globals";
 import {LOCKED_USER} from "../../globals";
 
-// const authStandardUserFile = STANDARD_USER;
-// const authLockedUserFile = LOCKED_USER;
-
 setup('authenticate with standard user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
     await pm.login.goto();
