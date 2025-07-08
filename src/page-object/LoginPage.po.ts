@@ -1,13 +1,11 @@
 import {Page} from "@playwright/test";
 import {Locator} from "@playwright/test";
+import {BasePagePo} from "./BasePage.po";
 
-export class LoginPage{
+export class LoginPagePo extends BasePagePo{
 
-    constructor(private page: Page) {
-    }
-
-    async goto() {
-        await this.page.goto('https://www.saucedemo.com/');
+    constructor( page: Page) {
+        super(page, '/')
     }
 
     getUsernameField(): Locator {
