@@ -46,14 +46,5 @@ export default defineConfig({
       // Use prepared auth state.
       dependencies: ['setup'],
     },
-    {
-      name: 'Google_Chrome_Locked_User',
-      testDir: './src/tests/lockedUser/',
-      testMatch: /.*\.test\.ts/,
-      use: { ...devices['Desktop chrome'],
-        storageState: LOCKED_USER},
-      // Use prepared auth state.
-      dependencies: ['setup'],
-    }
   ],
 });

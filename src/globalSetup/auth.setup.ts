@@ -1,7 +1,7 @@
 import { test as setup, expect } from '@playwright/test';
 import {PageObjectManagerPo} from "../page-object/PageObjectManager.po";
-import {STANDARD_USER} from "../../globals";
-import {LOCKED_USER} from "../../globals";
+import {STANDARD_USER, LOCKED_USER} from "../../globals";
+
 
 setup('authenticate with standard user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
@@ -16,7 +16,7 @@ setup('authenticate with standard user', async ({ page }) => {
     await page.context().storageState({ path: STANDARD_USER });
 });
 
-setup('authenticate with locked out user', async ({ page }) => {
+setup('authenticate with locked user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
     await pm.login.goto();
     await expect(pm.login.getUsernameField()).toBeVisible();
