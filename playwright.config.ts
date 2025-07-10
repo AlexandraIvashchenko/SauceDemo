@@ -1,5 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
-import {LOCKED_USER, STANDARD_USER} from "./globals";
+import {STANDARD_USER} from "./globals";
+import dotenv from 'dotenv';
+dotenv.config();
+
+console.log(process.env.BASE_URL);
+
 
 /**
  * Read environment variables from file.
