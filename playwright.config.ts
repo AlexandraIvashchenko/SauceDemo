@@ -1,11 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import {STANDARD_USER} from "./globals";
-import dotenv from 'dotenv';
-dotenv.config();
-
-console.log(process.env.BASE_URL);
-
-
+import {STANDARD_USER_PATH} from "./globals";
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -47,7 +41,7 @@ export default defineConfig({
       testDir: './src/tests/standardUser/',
       testMatch: /.*\.test\.ts/,
       use: { ...devices['Desktop chrome'],
-        storageState: STANDARD_USER},
+        storageState: STANDARD_USER_PATH},
       // Use prepared auth state.
       dependencies: ['setup'],
     },

@@ -1,18 +1,18 @@
 import { test as setup, expect } from '@playwright/test';
 import {PageObjectManagerPo} from "../page-object/PageObjectManager.po";
 import {STANDARD_USER_PATH, LOCKED_USER_PATH, PROBLEM_USER_PATH} from "../../globals";
-import dotenv from 'dotenv';
+import {getEnvironmentVariable} from "../helpers/env";
 
-dotenv.config();
+const standardUsername = getEnvironmentVariable('STANDARD_USER', true);
+const standardPassword = getEnvironmentVariable('STANDARD_PASSWORD', true)
 
-const standardUsername = process.env.STANDARD_USER!;
-const standardPassword = process.env.STANDARD_PASSWORD!;
+const lockedUsername = getEnvironmentVariable('LOCKED_USER', true)
+const lockedPassword = getEnvironmentVariable('LOCKED_PASSWORD', true)
 
-const lockedUsername = process.env.LOCKED_USER!;
-const lockedPassword = process.env.LOCKED_PASSWORD!;
+const problemUsername = getEnvironmentVariable('PROBLEM_USER', true)
+const problemPassword = getEnvironmentVariable('PROBLEM_PASSWORD',true)
 
-const problemUsername = process.env.PROBLEM_USER!;
-const problemPassword = process.env.PROBLEM_PASSWORD!;
+
 
 setup('authenticate with standard user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
