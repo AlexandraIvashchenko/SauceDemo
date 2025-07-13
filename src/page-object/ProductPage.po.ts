@@ -40,7 +40,7 @@ export class ProductPagePo extends BasePagePo{
     }
 
     getSortElementPriceLowToHigh(): Locator{
-        return this.page.locator('[data-test="product-sort-container"]:has-text("Price (low to high)")')
+        return this.page.locator('[data-test="product-sort-container"] option[value="lohi"]')
     }
 
     async selectPriceLowToHigh(){

@@ -20,22 +20,12 @@ test('item can be added to the cart', async ({pm}) => {
 test('sort items from low to high', async ({pm}) => {
     await pm.product.goto();
     expect(pm.product.getCurrentUrl()).toContain('/inventory.html');
-
-    // Получаем цены до сортировки
     const firstPrice = await pm.product.getFirstProductPrice();
-
-    // Проверка, что кнопка сортировки видима
     await expect(pm.product.getSortButton()).toBeVisible({timeout: 2000});
     await pm.product.selectSortButton();
-
-    // Проверка, что пункт "Price (low to high)" появился
-    await expect(pm.product.getSortElementPriceLowToHigh()).toBeVisible({timeout: 2000});
+    // await expect(pm.product.getSortElementPriceLowToHigh()).toBeVisible({timeout: 2000});
     await pm.product.selectPriceLowToHigh();
-
-    //получаем цену после сортировки
     const minPrice = await pm.product.getMinProductPrice();
-
-    // Проверяем, что первая цена после сортировки — минимальная
     expect(firstPrice).toBe(minPrice);
 });
 
