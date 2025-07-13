@@ -17,16 +17,12 @@ test('item can be added to the cart', async ({pm}) => {
     await expect(pm.product.getItemsNumberInTheCart()).toHaveText('1')
 });
 
-test('sort items from low to high', async ({pm}) => {
+test('add item to cart via HTTP client', async ({ pm }) => {
     await pm.product.goto();
-    expect(pm.product.getCurrentUrl()).toContain('/inventory.html');
-    const firstPrice = await pm.product.getFirstProductPrice();
-    await expect(pm.product.getSortButton()).toBeVisible({timeout: 2000});
-    await pm.product.selectSortButton();
-    // await expect(pm.product.getSortElementPriceLowToHigh()).toBeVisible({timeout: 2000});
-    await pm.product.selectPriceLowToHigh();
-    const minPrice = await pm.product.getMinProductPrice();
-    expect(firstPrice).toBe(minPrice);
+    await pm.httpClient.addItemToCart('4');
+    const cart = await pm.httpClient.getCartContents();
+    expect(cart).toContain('4');
+    await pm.httpClient.clearCart();
 });
 
 

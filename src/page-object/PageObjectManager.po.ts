@@ -1,5 +1,4 @@
 import {Page} from "@playwright/test";
-import {APIRequestContext} from "@playwright/test";
 import {LoginPagePo} from "./LoginPage.po";
 import {ProductPagePo} from "./ProductPage.po";
 import {LogoutPagePo} from "./LogoutPage.po";
@@ -7,7 +6,7 @@ import {HttpClient} from "../httpClient/HttpClient";
 
 export class PageObjectManagerPo {
     constructor(
-        private page: Page, private httpClientContext: APIRequestContext) {
+        private page: Page) {
 
     }
 
@@ -24,6 +23,6 @@ export class PageObjectManagerPo {
     }
 
     get httpClient(): HttpClient {
-        return new HttpClient(this.httpClientContext);
+        return new HttpClient(this.page);
     }
 }

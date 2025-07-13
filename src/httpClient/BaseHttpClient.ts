@@ -12,15 +12,11 @@ export class BaseHttpClient {
     }
 
     async post(url: string, data: any): Promise<APIResponse> {
-        return await this.request.post(url, {
-            data,
-        });
+        return await this.request.post(url,{data});
     }
 
     async put(url: string, data: any): Promise<APIResponse> {
-        return await this.request.put(url, {
-            data,
-        });
+        return await this.request.put(url,{data});
     }
 
     async delete(url: string): Promise<APIResponse> {

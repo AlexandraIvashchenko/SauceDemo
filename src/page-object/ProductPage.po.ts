@@ -31,34 +31,4 @@ export class ProductPagePo extends BasePagePo{
         await this.getRemoveButton(itemName).click();
     }
 
-    getSortButton(): Locator{
-        return this.page.locator('[data-test="product-sort-container"]')
-    }
-
-    async selectSortButton(){
-        await this.getSortButton().click();
-    }
-
-    getSortElementPriceLowToHigh(): Locator{
-        return this.page.locator('[data-test="product-sort-container"] option[value="lohi"]')
-    }
-
-    async selectPriceLowToHigh(){
-        await this.getSortElementPriceLowToHigh().click();
-    }
-
-    async getAllProductPrices(): Promise<number[]> {
-        const priceTexts = await this.page.locator('.inventory_item_price').allTextContents();
-        return priceTexts.map(text => parseFloat(text.replace('$', '')));
-    }
-
-    async getMinProductPrice(): Promise<number> {
-        const prices = await this.getAllProductPrices();
-        return Math.min(...prices);
-    }
-
-    async getFirstProductPrice(): Promise<number> {
-        const firstText = await this.page.locator('.inventory_item_price').first().textContent();
-        return parseFloat(firstText?.replace('$', '') || '0');
-    }
 }

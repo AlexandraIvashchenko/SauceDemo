@@ -1,21 +1,27 @@
-import { BaseHttpClient } from './BaseHttpClient';
-import { APIRequestContext, APIResponse } from '@playwright/test';
+import { Page } from '@playwright/test';
 
-export class HttpClient extends BaseHttpClient {
-    constructor(request: APIRequestContext) {
-        super(request);
+export class HttpClient {
+    constructor(private page: Page) {}
+
+    async addItemToCart(itemId: string): Promise<void> {
+        await this.page.evaluate((id) => {
+            const currentCart = JSON.parse(localStorage.getItem('cart-contents') || '[]');
+            if (!currentCart.includes(id)) {
+                currentCart.push(id);
+                localStorage.setItem('cart-contents', JSON.stringify(currentCart));
+            }
+        }, itemId);
     }
 
-    async getInventoryPage(): Promise<string> {
-        const response = await this.get('/inventory.html');
-        return response.text();
+    async getCartContents(): Promise<string[]> {
+        return this.page.evaluate(() => {
+            return JSON.parse(localStorage.getItem('cart-contents') || '[]');
+        });
     }
 
-    async addItemToCart(itemId: string): Promise<APIResponse> {
-        return this.post('/api/cart/add', {itemId});
-    }
-
-    async updateItemInTheCart(itemId: string):Promise<APIResponse> {
-        return this.put('/api/cart/update', {itemId})
+    async clearCart(): Promise<void> {
+        await this.page.evaluate(() => {
+            localStorage.removeItem('cart-contents');
+        });
     }
 }
