@@ -41,6 +41,7 @@ export default defineConfig({
       testDir: './src/tests/standardUser/',
       testMatch: /.*\.test\.ts/,
       use: { ...devices['Desktop chrome'],
+        video: 'retain-on-failure',
         storageState: STANDARD_USER_PATH},
       // Use prepared auth state.
       dependencies: ['setup'],

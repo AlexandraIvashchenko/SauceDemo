@@ -1,6 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/BaseFile';
-import * as timers from "node:timers";
+import {HttpClient} from "../../httpClient/HttpClient";
 
 test('item can be added to the cart', async ({pm}) => {
     await pm.product.goto();

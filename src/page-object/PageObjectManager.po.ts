@@ -1,22 +1,29 @@
 import {Page} from "@playwright/test";
+import {APIRequestContext} from "@playwright/test";
+import {LoginPagePo} from "./LoginPage.po";
 import {ProductPagePo} from "./ProductPage.po";
 import {LogoutPagePo} from "./LogoutPage.po";
-import {LoginPagePo} from "./LoginPage.po";
+import {HttpClient} from "../httpClient/HttpClient";
 
-export class PageObjectManagerPo{
+export class PageObjectManagerPo {
+    constructor(
+        private page: Page, private httpClientContext: APIRequestContext) {
 
-    constructor(private page: Page) {
     }
 
-    get login(): LoginPagePo{
+    get login(): LoginPagePo {
         return new LoginPagePo(this.page);
     }
 
-    get product(): ProductPagePo{
+    get product(): ProductPagePo {
         return new ProductPagePo(this.page);
     }
 
-    get logout(): LogoutPagePo{
-        return new LogoutPagePo(this.page)
+    get logout(): LogoutPagePo {
+        return new LogoutPagePo(this.page);
+    }
+
+    get httpClient(): HttpClient {
+        return new HttpClient(this.httpClientContext);
     }
 }
