@@ -7,28 +7,28 @@ export class ProductPagePo extends BasePagePo{
         super(page, '/inventory.html')
     }
 
-    getAddToCartButton(itemName: string): Locator {
+    addToCartButton(itemName: string): Locator {
         return this.page.locator(`[data-test="add-to-cart-${itemName}"]`);
     }
 
     async addToCart(itemName: string) {
-        await this.getAddToCartButton(itemName).click();
+        await this.addToCartButton(itemName).click();
     }
 
-    getCartButton(): Locator {
+    get cartButton(): Locator {
         return this.page.locator('[data-test="shopping-cart-link"]');
     }
 
-    getItemsNumberInTheCart(): Locator {
+    get itemsNumberInTheCart(): Locator {
         return this.page.locator('[data-test="shopping-cart-badge"]');
     }
 
-    getRemoveButton(itemName: string): Locator {
+    removeButton(itemName: string): Locator {
         return this.page.locator(`[data-test="remove-${itemName}"]`);
     }
 
     async removeItemFromCart(itemName: string) {
-        await this.getRemoveButton(itemName).click();
+        await this.removeButton(itemName).click();
     }
 
 }

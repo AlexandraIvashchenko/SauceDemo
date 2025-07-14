@@ -7,23 +7,23 @@ export class LogoutPagePo extends BasePagePo{
         super(page, '/inventory.html');
     }
 
-    getMenuToGetLogoutButton(): Locator{
+    get MenuToGetLogoutButton(): Locator{
         return this.page.locator('[id="react-burger-menu-btn"]')
     }
 
-    getLogoutButton(): Locator{
+    get LogoutButton(): Locator{
         return this.page.locator('[data-test="logout-sidebar-link"]')
     }
 
     async openMenu(): Promise<void> {
-        await this.getMenuToGetLogoutButton().click();
+        await this.MenuToGetLogoutButton.click();
     }
 
     async clickLogout(): Promise<void> {
-        await this.getLogoutButton().click();
+        await this.LogoutButton.click();
     }
 
-    getUrl(): string {
+    get Url(): string {
         return this.page.url();
     }
 }

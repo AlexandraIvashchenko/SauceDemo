@@ -17,9 +17,9 @@ const problemPassword = getEnvironmentVariable('PROBLEM_PASSWORD',true)
 setup('authenticate with standard user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
     await pm.login.goto();
-    await expect(pm.login.getUsernameField()).toBeVisible();
-    await expect(pm.login.getPasswordField()).toBeVisible();
-    await expect(pm.login.getLoginButton()).toBeVisible();
+    await expect(pm.login.UsernameField).toBeVisible();
+    await expect(pm.login.PasswordField).toBeVisible();
+    await expect(pm.login.LoginButton).toBeVisible();
     await pm.login.loginWithCredentials(standardUsername, standardPassword);
     await page.context().storageState({path: STANDARD_USER_PATH})
 });
@@ -27,20 +27,20 @@ setup('authenticate with standard user', async ({ page }) => {
 setup('authenticate with locked user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
     await pm.login.goto();
-    await expect(pm.login.getUsernameField()).toBeVisible();
-    await expect(pm.login.getPasswordField()).toBeVisible();
-    await expect(pm.login.getLoginButton()).toBeVisible();
+    await expect(pm.login.UsernameField).toBeVisible();
+    await expect(pm.login.PasswordField).toBeVisible();
+    await expect(pm.login.LoginButton).toBeVisible();
     await pm.login.loginWithCredentials(lockedUsername, lockedPassword);
-    await expect(pm.login.getErrorMessage()).toBeVisible();
+    await expect(pm.login.ErrorMessage).toBeVisible();
     await page.context().storageState({path: LOCKED_USER_PATH});
 });
 
 setup('authenticate with problem user', async ({ page }) => {
     const pm = new PageObjectManagerPo(page);
     await pm.login.goto();
-    await expect(pm.login.getUsernameField()).toBeVisible();
-    await expect(pm.login.getPasswordField()).toBeVisible();
-    await expect(pm.login.getLoginButton()).toBeVisible();
+    await expect(pm.login.UsernameField).toBeVisible();
+    await expect(pm.login.PasswordField).toBeVisible();
+    await expect(pm.login.LoginButton).toBeVisible();
     await pm.login.loginWithCredentials(problemUsername, problemPassword);
     await page.context().storageState({path: PROBLEM_USER_PATH})
 });

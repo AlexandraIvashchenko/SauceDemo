@@ -9,25 +9,25 @@ export class LoginPagePo extends BasePagePo{
         super(page, '/inventory.html')
     }
 
-    getUsernameField(): Locator {
+    get UsernameField(): Locator {
         return this.page.locator('[name="user-name"]');
     }
 
-    getPasswordField(): Locator {
+    get PasswordField(): Locator {
         return this.page.locator('[name="password"]');
     }
 
-    getLoginButton(): Locator {
+    get LoginButton(): Locator {
         return this.page.locator('[name="login-button"]');
     }
 
-    getErrorMessage(): Locator{
+    get ErrorMessage(): Locator{
         return  this.page.locator('[data-test="error"]')
     }
 
     async loginWithCredentials(username: string, password: string) {
-        await this.getUsernameField().fill(username);
-        await this.getPasswordField().fill(password);
-        await this.getLoginButton().click();
+        await this.UsernameField.fill(username);
+        await this.PasswordField.fill(password);
+        await this.LoginButton.click();
     }
 }
